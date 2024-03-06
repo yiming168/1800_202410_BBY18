@@ -56,11 +56,3 @@ It has the following subfolders and files:
 
 
 ```
-This is a hello from yiming.
-
-This is abdullah
-
-Yiming is creating conflicts on the file.
-Yiming want to have conflicts.
-
-hi do you see this?
