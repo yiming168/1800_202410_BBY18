@@ -38,7 +38,23 @@ function readQuote(day) {
 		       //document.querySelector("#quote-goes-here").innerHTML = dayDoc.data().quote;
       })
 }
-readQuote("tuesday");        //calling the function
+// readQuote("tuesday");        //calling the function
+
+// Function to get the current date in the desired format (replace if needed)
+function getFormattedDate() {
+    const now = new Date();
+    const day = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();  // Get day in lowercase
+    return day;
+  }
+  
+  // Get today's date
+  const today = getFormattedDate();
+  
+  // Call the readQuote function with today's date
+  readQuote(today);
+  
+  // Simulate displaying the quote (replace with your actual display logic)
+  console.log(`Today's quote:`);
 
 function insertNameFromFirestore() {
     // Check if the user is logged in:
