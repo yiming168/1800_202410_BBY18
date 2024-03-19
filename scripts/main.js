@@ -22,7 +22,23 @@ function getNameFromAuth() {
         }
     });
 }
-getNameFromAuth(); //run the function
+
+function handleLogout() {
+    event.preventDefault(); // Prevent default anchor link behavior
+    try {
+      firebase.auth().signOut().then(() => {
+        console.log('User logged out successfully');
+        // Add logic to update UI or redirect (optional)
+      }).catch((error) => {
+        console.error('Error logging out:', error);
+      });
+    } catch (error) {
+      // Handle any errors in the signOut process
+      console.error(error);
+    }
+    const logoutLink = document.getElementById('logoutLink');
+    logoutLink.addEventListener('click', handleLogout);
+  }
 
 // Function to read the quote of the day from the Firestore "quotes" collection
 // Input param is the String representing the day of the week, aka, the document name
@@ -74,5 +90,6 @@ function insertNameFromFirestore() {
         }
     })
 }
+
 
 insertNameFromFirestore();
