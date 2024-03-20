@@ -46,3 +46,7 @@ function populateUserInfo() {
 
 //call the function to run it 
 populateUserInfo();
+
+function editUserInfo(){
+    document.getElementById('personalInfoFields').ariaDisabled = false;
+}
