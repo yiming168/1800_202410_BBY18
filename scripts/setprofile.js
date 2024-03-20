@@ -15,6 +15,7 @@ function populateUserInfo() {
                             let userPetPref = userDoc.data().petPref;
                             let userGuestPref = userDoc.data().guestPref;
                             let userMorningType = userDoc.data().morningType;
+                            let userNumber = userDoc.data().number;
 
                             //if the data fields are not empty, then write them in to the form.
                             if (userName != null) {
@@ -31,6 +32,9 @@ function populateUserInfo() {
                             }
                             if (userMorningType != null) {
                                 document.getElementById("morningInput").value = userMorningType;
+                            }
+                            if (userNumber != null) {
+                                document.getElementById("numberInput").value = userNumber;
                             }
                         })
                 } else {
