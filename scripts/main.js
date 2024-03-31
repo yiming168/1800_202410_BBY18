@@ -61,7 +61,7 @@ function insertNameFromFirestore() {
         document.getElementById("name-goes-here").innerText = userName;
 
         // Check if the user has completed profile setup
-        if (!userDoc.data().guest || !userDoc.data().morning || !userDoc.data().number || !userDoc.data().pet)
+        if (userDoc.data().pet === null || userDoc.data().morning === null || userDoc.data().guest === null || !userDoc.data().number)
           // Redirect the user to set up their profile
           window.location.href = "setprofile.html"; // Replace "set-profile.html" with the actual URL of your profile setup page
       })
