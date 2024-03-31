@@ -61,6 +61,7 @@ function saveUserInfo() {
     userMorningType = document.getElementById('morningInput').value;     
     userNumber = document.getElementById('numberInput').value;       
 
+    
     //b) update user's document in Firestore
     currentUser.update({
         name: userName,
@@ -72,7 +73,12 @@ function saveUserInfo() {
     })
     .then(() => {
         console.log("Document successfully updated!");
+        // Redirect to main page after successful update
+        window.location.href = "main.html"; // Replace "main-page.html" with the actual URL of your main page
     })
+    .catch(error => {
+        console.error("Error updating document: ", error);
+    });
     //c) disable edit 
     document.getElementById('personalInfoFields').disabled = true;
 }
