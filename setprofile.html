@@ -53,7 +53,8 @@
     <div class="container bg-light p-5">
       <h1 class="display-4">Your Profile</h1>
       <hr>
-      <p>The information you provide can help you find a suitable roommate. You need to fill it out when you log in for the first time, but you can also modify it anytime after your setting up.</p>
+      <p>The information you provide can help you find a suitable roommate. You need to fill it out when you log in for
+        the first time, but you can also modify it anytime after your setting up.</p>
     </div>
   </div>
 
@@ -76,17 +77,44 @@
           <label>Phone Number</label>
           <input type="text" id="numberInput" class="form-control">
         </div>
+
+        <!-- Do you prefer to have guests come around sometime? -->
         <div class="form-group">
-          <label>Do you prefer to have guests come around sometime?(Enter yes or no)</label>
-          <input type="text" id="guestInput" class="form-control">
+          <label>Do you prefer to have guests come around sometime?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="guestInput" id="guestYes" value="true">
+            <label class="form-check-label" for="guestYes">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="guestInput" id="guestNo" value="false">
+            <label class="form-check-label" for="guestNo">No</label>
+          </div>
         </div>
+
+        <!-- Are you a morning type person? -->
         <div class="form-group">
-          <label>Are you a morning type person?(Enter yes or no)</label>
-          <input type="text" id="morningInput" class="form-control">
+          <label>Are you a morning type person?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="morningInput" id="morningYes" value="true">
+            <label class="form-check-label" for="morningYes">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="morningInput" id="morningNo" value="false">
+            <label class="form-check-label" for="morningNo">No</label>
+          </div>
         </div>
+
+        <!-- Do you mind your roommates having pets? -->
         <div class="form-group">
-          <label>Do you mind your roommates have pets?(Enter yes or no)</label>
-          <input type="text" id="petInput" class="form-control">
+          <label>Do you mind your roommates having pets?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="petInput" id="petYes" value="true">
+            <label class="form-check-label" for="petYes">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="petInput" id="petNo" value="false">
+            <label class="form-check-label" for="petNo">No</label>
+          </div>
         </div>
       </fieldset>
       <div class="d-flex justify-content-end mt-5">

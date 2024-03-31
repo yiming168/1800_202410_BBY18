@@ -21,20 +21,28 @@ function populateUserInfo() {
                     if (userName != null) {
                         document.getElementById("nameInput").value = userName;
                     }
-                    if (userPetPref != null) {
-                        document.getElementById("petInput").value = userPetPref;
+                    if (userNumber != null) {
+                        document.getElementById("numberInput").value = userNumber;
                     }
                     if (userCity != null) {
                         document.getElementById("cityInput").value = userCity;
                     }
-                    if (userGuestPref != null) {
-                        document.getElementById("guestInput").value = userGuestPref;
+
+                    // Check and set radio button states for preferences
+                    if (userGuestPref === "yes") {
+                        document.getElementById("guestYes").checked = true;
+                    } else if (userGuestPref === "no") {
+                        document.getElementById("guestNo").checked = true;
                     }
-                    if (userMorningType != null) {
-                        document.getElementById("morningInput").value = userMorningType;
+                    if (userMorningType === "yes") {
+                        document.getElementById("morningYes").checked = true;
+                    } else if (userMorningType === "no") {
+                        document.getElementById("morningNo").checked = true;
                     }
-                    if (userNumber != null) {
-                        document.getElementById("numberInput").value = userNumber;
+                    if (userPetPref === "yes") {
+                        document.getElementById("petYes").checked = true;
+                    } else if (userPetPref === "no") {
+                        document.getElementById("petNo").checked = true;
                     }
                 })
         } else {
@@ -54,12 +62,12 @@ function editUserInfo() {
 
 function saveUserInfo() {
     //a) get user entered values
-    userName = document.getElementById('nameInput').value;      
-    userPetPref = document.getElementById('petInput').value;    
-    userCity = document.getElementById('cityInput').value;      
-    userGuestPref = document.getElementById('guestInput').value;       
-    userMorningType = document.getElementById('morningInput').value;     
-    userNumber = document.getElementById('numberInput').value;       
+    let userName = document.getElementById('nameInput').value;      
+    let userNumber = document.getElementById('numberInput').value;    
+    let userCity = document.getElementById('cityInput').value;      
+    let userGuestPref = document.querySelector('input[name="guestInput"]:checked').value === "true";
+    let userMorningType = document.querySelector('input[name="morningInput"]:checked').value === "true";
+    let userPetPref = document.querySelector('input[name="petInput"]:checked').value === "true";
 
     
     //b) update user's document in Firestore
@@ -78,6 +86,7 @@ function saveUserInfo() {
     })
     .catch(error => {
         console.error("Error updating document: ", error);
+        alert("Error updating document. Please try again later.");
     });
     //c) disable edit 
     document.getElementById('personalInfoFields').disabled = true;
