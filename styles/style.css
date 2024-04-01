@@ -120,3 +120,12 @@ footer {
   color: #78d5d7; /* Light blue for other details */
   margin-bottom: 5px;
 }
+
+.nav-link, .custom-color {
+  color: #2081c3;
+}
+
+.centeritem{
+  display:block;
+  width: 100%;
+}

@@ -170,3 +170,43 @@ firebase.auth().onAuthStateChanged(user => {
   }
 });
 
+function getFormattedDateTime() {
+  const now = new Date();
+  const day = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase(); // Get day in lowercase
+  const hour = now.getHours();
+  let timeOfDay;
+
+  if (hour >= 5 && hour < 12) {
+    timeOfDay = 'morning';
+  } else if (hour >= 12 && hour < 18) {
+    timeOfDay = 'afternoon';
+  } else {
+    timeOfDay = 'evening';
+  }
+
+  return { day, timeOfDay };
+}
+
+function displayGreeting() {
+  const { day, timeOfDay } = getFormattedDateTime();
+  let greeting;
+
+  switch (timeOfDay) {
+    case 'morning':
+      greeting = 'Good morning';
+      break;
+    case 'afternoon':
+      greeting = 'Good afternoon';
+      break;
+    case 'evening':
+      greeting = 'Good evening';
+      break;
+    default:
+      greeting = 'Hello';
+  }
+
+  document.getElementById("greeting").innerText = `${greeting}, `;
+}
+
+// Call the displayGreeting function to display the appropriate greeting message
+displayGreeting();
