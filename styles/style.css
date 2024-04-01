@@ -1,20 +1,30 @@
-
 /*-------------------------------------
  * customize material design icon sizes 
  *-------------------------------------
  */
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
 .responsive {
-    width: 100%;
-    height: auto;
-  }
+  width: 100%;
+  height: auto;
+}
 
-.centerimg{
+.centerimg {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -22,8 +32,40 @@
   height: 20%;
 }
 
-.fitimg{
+.fitimg {
   width: 100vw;
   height: auto;
 }
 
+.roove-logo {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 60px;
+  color: #2081C3;
+  /* Blue color */
+  text-transform: uppercase;
+  /* Convert text to uppercase */
+  letter-spacing: 5px;
+  /* Add spacing between letters */
+}
+
+/* Styling for each letter */
+.roove-logo span {
+  position: relative;
+  display: inline-block;
+}
+
+/* Shadow effect for each letter */
+.roove-logo span::after {
+  content: attr(data-letter);
+  /* Use data-letter attribute as content */
+  position: absolute;
+  left: 2px;
+  /* Adjust position as needed */
+  top: 2px;
+  /* Adjust position as needed */
+  color: #78d5d7;
+  /* Light blue color */
+  text-shadow: 1px 1px 0 #bed8d4;
+  /* Light shadow effect */
+}
