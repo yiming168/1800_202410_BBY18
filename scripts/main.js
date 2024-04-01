@@ -141,6 +141,7 @@ function displayMatchedUsersPopup(matchedUsers) {
       <p>Email: ${user.email}</p>
       <p>Phone: ${user.number}</p>
       <p>CIty: ${user.city}</p>
+      <span class="favorite-icon material-icons" onclick="saveFavorite('${user.id}')">favorite_border</span>
     `;
     container.appendChild(userCard);
   });
@@ -210,3 +211,24 @@ function displayGreeting() {
 
 // Call the displayGreeting function to display the appropriate greeting message
 displayGreeting();
+
+
+function saveFavorite(userId) {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      const currentUserRef = db.collection("users").doc(user.uid);
+      currentUserRef.update({
+        favorites: firebase.firestore.FieldValue.arrayUnion(userId)
+      })
+      .then(() => {
+        console.log('User added to favorites successfully');
+        // Optionally, you can update UI to reflect the change
+      })
+      .catch(error => {
+        console.error('Error adding user to favorites:', error);
+      });
+    } else {
+      console.log('No user is logged in.');
+    }
+  });
+}
