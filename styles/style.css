@@ -38,33 +38,41 @@
 }
 
 .roove-logo {
-  font-family: 'Arial', sans-serif;
-  font-weight: bold;
-  font-size: 40px; /* Adjust font size */
-  color: #2081C3; /* Blue color */
-  text-transform: uppercase; /* Convert text to uppercase */
-  letter-spacing: 1px; /* Reduce letter spacing */
-  width: fit-content; /* Set width to fit content */
+  display: flex;
+  align-items: center;
+  font-family: sans-serif; /* Change this if you prefer a different font */
 }
 
-/* Styling for each letter */
 .roove-logo span {
-  position: relative;
-  display: inline-block;
+  position: relative; /* Needed for relative positioning of the "R" */
+  font-size: 1.5em;  /* Base size for all letters */
 }
 
-/* Shadow effect for each letter */
-.roove-logo span::after {
-  content: attr(data-letter); /* Use data-letter attribute as content */
-  position: absolute;
-  left: 1px; /* Adjust position as needed */
-  top: 1px; /* Adjust position as needed */
-  color: #78d5d7; /* Light blue color */
-  text-shadow: 1px 1px 0 #bed8d4; /* Light shadow effect */
+.roove-logo span:nth-child(1) {  /* Style for the "R" */
+  font-size: 2em;  /* Increase font size for "R" */
+  color: #2081c3; /* Blue color for "R" */
+  /* Lettering effect for "R" (adjust as needed) */
+  letter-spacing: 0.2em;
+  text-shadow: 0.1em 0.1em 0.2em rgba(5, 41, 54, 0.3);
+}
+
+.roove-logo span:nth-child(2), .roove-logo span:nth-child(3) {
+  margin-left: -0.3em; /* Adjust spacing to accommodate the bigger "R" */
+  color: #bed8d4; /* Orange color for second and third letters */
+}
+
+.roove-logo span:nth-child(4) {
+  margin-left: -0.1em; /* Adjust spacing for the last letter */
+  color: #78d5d7; /* Orange color for fourth letter */
+}
+.roove-logo span:nth-child(5) {
+  margin-left: -0.1em; /* Adjust spacing for the last letter */
+  color: #78d5d7; /* Orange color for fourth letter */
 }
 
 body {
   display: gird;
+  background-color: F7f9f9;
   grid-template-rows: auto 1fr auto;
 }
 
