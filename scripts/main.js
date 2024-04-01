@@ -72,3 +72,101 @@ function insertNameFromFirestore() {
 }
 
 insertNameFromFirestore();
+
+// Function to fetch the logged-in user's preferences from Firestore
+function fetchLoggedInUserPreferences() {
+  return new Promise((resolve, reject) => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User is logged in, fetch preferences from Firestore
+        db.collection("users").doc(user.uid).get()
+          .then(userDoc => {
+            const loggedInUserPreferences = {
+              pet: userDoc.data().pet,
+              guest: userDoc.data().guest,
+              morning: userDoc.data().morning
+            };
+            resolve(loggedInUserPreferences);
+          })
+          .catch(error => {
+            console.error("Error fetching user preferences:", error);
+            reject(error);
+          });
+      } else {
+        // User is not logged in
+        reject(new Error("User is not logged in"));
+      }
+    });
+  });
+}
+
+// Function to query Firestore for users with matching preferences
+function queryMatchingUsers(loggedInUserPreferences) {
+  return new Promise((resolve, reject) => {
+    // Query Firestore to find users whose preferences match the logged-in user's preferences
+    db.collection("users")
+      .where("pet", "==", loggedInUserPreferences.pet)
+      .where("guest", "==", loggedInUserPreferences.guest)
+      .where("morning", "==", loggedInUserPreferences.morning)
+      .limit(4) // Limit the number of matched users to 4
+      .get()
+      .then(querySnapshot => {
+        const matchedUsers = [];
+        querySnapshot.forEach(doc => {
+          const userData = doc.data();
+          // Exclude the logged-in user from the list of matched users
+          if (doc.id !== firebase.auth().currentUser.uid) {
+            matchedUsers.push(userData);
+          }
+        });
+        resolve(matchedUsers);
+      })
+      .catch(error => {
+        console.error("Error querying matching users:", error);
+        reject(error);
+      });
+  });
+}
+
+// Function to display matched users in the popup
+function displayMatchedUsersPopup(matchedUsers) {
+  const container = document.getElementById('matchingUsersContainer');
+  container.innerHTML = ''; // Clear previous content
+  
+  matchedUsers.forEach(user => {
+    const userCard = document.createElement('div');
+    userCard.classList.add('user-card');
+    userCard.innerHTML = `
+      <h3>${user.name}</h3>
+      <p>Email: ${user.email}</p>
+      <p>Phone: ${user.number}</p>
+      <p>CIty: ${user.city}</p>
+    `;
+    container.appendChild(userCard);
+  });
+
+  // Display the popup
+  const popup = document.getElementById('matchingUsersPopup');
+  popup.style.display = 'block';
+}
+
+// Auto-fetch matched users when the user is logged in
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    fetchLoggedInUserPreferences()
+      .then(loggedInUserPreferences => {
+        queryMatchingUsers(loggedInUserPreferences)
+          .then(matchedUsers => {
+            // Display matched users in the popup
+            displayMatchedUsersPopup(matchedUsers);
+          })
+          .catch(error => {
+            console.error("Error querying matching users:", error);
+          });
+      })
+      .catch(error => {
+        console.error("Error fetching user preferences:", error);
+      });
+  }
+});
+

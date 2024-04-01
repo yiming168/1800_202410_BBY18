@@ -40,13 +40,11 @@
 .roove-logo {
   font-family: 'Arial', sans-serif;
   font-weight: bold;
-  font-size: 60px;
-  color: #2081C3;
-  /* Blue color */
-  text-transform: uppercase;
-  /* Convert text to uppercase */
-  letter-spacing: 5px;
-  /* Add spacing between letters */
+  font-size: 40px; /* Adjust font size */
+  color: #2081C3; /* Blue color */
+  text-transform: uppercase; /* Convert text to uppercase */
+  letter-spacing: 1px; /* Reduce letter spacing */
+  width: fit-content; /* Set width to fit content */
 }
 
 /* Styling for each letter */
@@ -57,15 +55,60 @@
 
 /* Shadow effect for each letter */
 .roove-logo span::after {
-  content: attr(data-letter);
-  /* Use data-letter attribute as content */
+  content: attr(data-letter); /* Use data-letter attribute as content */
   position: absolute;
-  left: 2px;
-  /* Adjust position as needed */
-  top: 2px;
-  /* Adjust position as needed */
-  color: #78d5d7;
-  /* Light blue color */
-  text-shadow: 1px 1px 0 #bed8d4;
-  /* Light shadow effect */
+  left: 1px; /* Adjust position as needed */
+  top: 1px; /* Adjust position as needed */
+  color: #78d5d7; /* Light blue color */
+  text-shadow: 1px 1px 0 #bed8d4; /* Light shadow effect */
+}
+
+body {
+  display: gird;
+  grid-template-rows: auto 1fr auto;
+}
+
+nav {
+  grid-row: 1;
+}
+
+.container-fluid {
+  grid-row:2;
+}
+
+#matchingUsersPopup {
+  position: relative; /* Relative positioning */
+    grid-row: 3; /* Position after the quote section */
+    justify-tracks: center;
+    display: none; /* Initially hide the pop-up */
+    z-index: 9999; /* Ensure the pop-up is above other elements */
+}
+footer {
+  grid-row: 4;
+}
+
+#matchingUsersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.user-card {
+  background-color: #f7f9f9; /* Light gray background */
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px; /* Add margin between cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  max-width: 500px; /* Limit the width of the user card */
+  width: auto;
+}
+
+.user-card h3 {
+  color: #2081c3; /* Dark blue for the user's name */
+  margin-bottom: 10px;
+}
+
+.user-card p {
+  color: #78d5d7; /* Light blue for other details */
+  margin-bottom: 5px;
 }
