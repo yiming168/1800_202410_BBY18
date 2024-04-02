@@ -213,12 +213,12 @@ function displayGreeting() {
 displayGreeting();
 
 
-function saveFavorite(userId) {
+function saveFavorite(userDocId) {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       const currentUserRef = db.collection("users").doc(user.uid);
       currentUserRef.update({
-        favorites: firebase.firestore.FieldValue.arrayUnion(userId)
+        favorites: firebase.firestore.FieldValue.arrayUnion(userDocId)
       })
       .then(() => {
         console.log('User added to favorites successfully');

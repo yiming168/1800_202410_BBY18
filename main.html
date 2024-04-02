@@ -50,7 +50,8 @@
   <!-- the body of your page goes here -->
   <div class="container-fluid bg-light text-dark p-5">
     <div class="container bg-light p-5">
-      <h1 class="display-4"><span id = "greeting" class="custom-color"></span><span id="name-goes-here" class="custom-color"></span></h1>
+      <h1 class="display-4"><span id="greeting" class="custom-color"></span><span id="name-goes-here"
+          class="custom-color"></span></h1>
       <hr>
       <p class="custom-color">Quote of the day: <span id="quote-goes-here" class="custom-color"></span></p>
     </div>
@@ -65,6 +66,8 @@
       <div id="matchingUsersContainer">
         <!-- User cards will be populated here -->
       </div>
+      <!-- Button to email selected users -->
+      <button id="emailSelectedUsersBtn" onclick="emailSelectedUsers()">Email Selected Users</button>
     </div>
   </div>
 
