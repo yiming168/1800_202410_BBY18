@@ -132,13 +132,14 @@ function queryMatchingUsers(loggedInUserPreferences) {
 function displayMatchedUsersPopup(matchedUsers) {
   const container = document.getElementById('matchingUsersContainer');
   container.innerHTML = ''; // Clear previous content
-  
+
   matchedUsers.forEach(user => {
     const userCard = document.createElement('div');
     userCard.classList.add('user-card');
     userCard.innerHTML = `
+      <input type="checkbox" class="user-checkbox">
       <h3>${user.name}</h3>
-      <p>Email: ${user.email}</p>
+      <p class="user-email">Email: ${user.email}</p>
       <p>Phone: ${user.number}</p>
       <p>CIty: ${user.city}</p>
       <span class="favorite-icon material-icons" onclick="saveFavorite('${user.id}')">favorite_border</span>
@@ -220,15 +221,73 @@ function saveFavorite(userDocId) {
       currentUserRef.update({
         favorites: firebase.firestore.FieldValue.arrayUnion(userDocId)
       })
-      .then(() => {
-        console.log('User added to favorites successfully');
-        // Optionally, you can update UI to reflect the change
-      })
-      .catch(error => {
-        console.error('Error adding user to favorites:', error);
-      });
+        .then(() => {
+          console.log('User added to favorites successfully');
+          // Optionally, you can update UI to reflect the change
+        })
+        .catch(error => {
+          console.error('Error adding user to favorites:', error);
+        });
     } else {
       console.log('No user is logged in.');
     }
   });
+}
+
+// Function to email selected users
+function emailSelectedUsers() {
+  const selectedUsers = [];
+  const checkboxes = document.querySelectorAll('.user-card input[type="checkbox"]');
+
+  checkboxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      const userCard = checkbox.closest('.user-card');
+      const userData = {
+        name: userCard.querySelector('h3').textContent,
+        email: userCard.querySelector('.user-email').textContent
+      };
+      selectedUsers.push(userData);
+    }
+  });
+
+  if (selectedUsers.length > 0) {
+    // Update user status to "proposed" before sending the email
+    selectedUsers.forEach(user => {
+      updateUserStatus(user.email);
+    });
+
+    // Compose email content
+    const emailContent = "We have the same preference, if you are still interested in renting a room, we can rent together.";
+
+    // Construct mailto link with email content and selected email addresses
+    const emailAddresses = selectedUsers.map(user => user.email).join(',');
+    const emailSubject = "Roommate Match Proposal";
+    const mailtoLink = `mailto:${emailAddresses}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailContent)}`;
+
+    // Open email composition in a new window
+    const emailWindow = window.open(mailtoLink, '_blank');
+
+    // Close the new window after a delay (optional)
+    if (emailWindow) {
+      setTimeout(() => {
+        emailWindow.close();
+      }, 5000); // Adjust the delay as needed (in milliseconds)
+    }
+  } else {
+    alert("Please select at least one user to email.");
+  }
+}
+
+// Function to update user status to "proposed" in Firestore
+function updateUserStatus(email) {
+  // Update user status to "proposed" in Firestore
+  db.collection("users").where("email", "==", email).get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        doc.ref.update({ status: "proposed" });
+      });
+    })
+    .catch(error => {
+      console.error("Error updating user status:", error);
+    });
 }
