@@ -1,5 +1,5 @@
 var currentUser; // Points to the document of the user who is logged in
-
+var isFirstTimeUser = false; // Flag to track whether the user is editing their profile for the first time
 // Function to populate user information from Firestore and set default values for radio buttons
 function populateUserInfo() {
     firebase.auth().onAuthStateChanged(user => {
@@ -24,22 +24,18 @@ function populateUserInfo() {
                 document.getElementById("morningNo").checked = userMorningType === false;
                 document.getElementById("petYes").checked = userPetPref === true;
                 document.getElementById("petNo").checked = userPetPref === false;
-            });
 
-            // Load name, city, and number of the user
-            db.collection("users").doc(user.uid).get().then(doc => {
-                if (doc.exists) {
-                    let userData = doc.data();
-                    document.getElementById("nameInput").value = userData.name || "";
-                    document.getElementById("cityInput").value = userData.city || "";
-                    document.getElementById("numberInput").value = userData.number || "";
+                // Check if the user has completed profile setup
+                if (!userName || !userCity || !userNumber || userGuestPref === null || userMorningType === null || userPetPref === null) {
+                    isFirstTimeUser = true;
+                    // Enable the form fields for editing by default only for the first-time user
+                    document.getElementById('personalInfoFields').disabled = false;
                 } else {
-                    console.log("No such document!");
+                    isFirstTimeUser = false;
+                    // Disable the form fields for editing by default for other users
+                    document.getElementById('personalInfoFields').disabled = true;
                 }
-            }).catch(error => {
-                console.log("Error getting document:", error);
             });
-
         } else {
             console.log("No user is signed in");
         }
