@@ -50,3 +50,29 @@ populateUserInfo();
 function editUserInfo(){
     document.getElementById('personalInfoFields').ariaDisabled = false;
 }
+
+function saveUserInfo(){
+    userName = document.getElementById('nameInput').value;       //get the value of the field with id="nameInput"
+    userCity = document.getElementById('cityInput').value;     //get the value of the field with id="schoolInput"
+    userPetPref = document.getElementById('petInput').value;       //get the value of the field with id="cityInput"
+    userGuestPref = document.getElementById('guestInput').value;       //get the value of the field with id="nameInput"
+    userMorningType = document.getElementById('morningInput').value;     //get the value of the field with id="schoolInput"
+    userNumber = document.getElementById('numberInput').value;       //get the value of the field with id="cityInput"
+
+    currentUser.update({
+        name: userName,
+        city: userCity,
+        petPref: userPetPref,
+        guestPref: userGuestPref,
+        morningType: userMorningType,
+        number: userNumber
+    
+    })
+    .then(() => {
+        console.log("Document successfully updated!");
+    })    
+
+    document.getElementById('personalInfoFields').disabled = true;
+}
+
+

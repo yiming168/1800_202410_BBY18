@@ -27,3 +27,10 @@
   height: auto;
 }
 
+.col-md-6{
+  display:grid;
+  width: 100vw;
+  text-align:center;
+  align-items:center;
+}
+
