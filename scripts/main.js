@@ -143,7 +143,6 @@ function displayMatchedUsersPopup(matchedUsers) {
       <p class="user-email">Email: ${user.email}</p>
       <p>Phone: ${user.number}</p>
       <p>CIty: ${user.city}</p>
-      <span class="favorite-icon material-icons" onclick="saveFavorite('${user.id}')">favorite_border</span>
     `;
     container.appendChild(userCard);
   });
@@ -214,27 +213,6 @@ function displayGreeting() {
 // Call the displayGreeting function to display the appropriate greeting message
 displayGreeting();
 
-
-function saveFavorite(userDocId) {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      const currentUserRef = db.collection("users").doc(user.uid);
-      currentUserRef.update({
-        favorites: firebase.firestore.FieldValue.arrayUnion(userDocId)
-      })
-        .then(() => {
-          console.log('User added to favorites successfully');
-          // Optionally, you can update UI to reflect the change
-        })
-        .catch(error => {
-          console.error('Error adding user to favorites:', error);
-        });
-    } else {
-      console.log('No user is logged in.');
-    }
-  });
-}
-
 // Function to email selected users
 function emailSelectedUsers() {
   const selectedUsers = [];
@@ -258,7 +236,7 @@ function emailSelectedUsers() {
     });
 
     // Compose email content
-    const emailContent = "We have the same preference, if you are still interested in renting a room, we can rent together.";
+    const emailContent = "Hi. We have the same preference of renting. If you are still interested in renting a room, we can rent together.";
 
     // Construct mailto link with email content and selected email addresses
     const emailAddresses = selectedUsers.map(user => user.email).join(',');
@@ -268,12 +246,6 @@ function emailSelectedUsers() {
     // Open email composition in a new window
     const emailWindow = window.open(mailtoLink, '_blank');
 
-    // Close the new window after a delay (optional)
-    if (emailWindow) {
-      setTimeout(() => {
-        emailWindow.close();
-      }, 5000); // Adjust the delay as needed (in milliseconds)
-    }
   } else {
     alert("Please select at least one user to email.");
   }

@@ -37,50 +37,64 @@
   height: auto;
 }
 
-.col-md-6{
+.col-md-6 {
   display: grid;
   width: 100vw;
-  text-align:center;
-  align-items:center;
+  text-align: center;
+  align-items: center;
 }
 
 .roove-logo {
   display: flex;
   align-items: center;
-  font-family: sans-serif; /* Change this if you prefer a different font */
+  font-family: sans-serif;
+  /* Change this if you prefer a different font */
 }
 
 .roove-logo span {
-  position: relative; /* Needed for relative positioning of the "R" */
-  font-size: 1.5em;  /* Base size for all letters */
+  position: relative;
+  /* Needed for relative positioning of the "R" */
+  font-size: 1.5em;
+  /* Base size for all letters */
 }
 
-.roove-logo span:nth-child(1) {  /* Style for the "R" */
-  font-size: 2em;  /* Increase font size for "R" */
-  color: #2081c3; /* Blue color for "R" */
+.roove-logo span:nth-child(1) {
+  /* Style for the "R" */
+  font-size: 2em;
+  /* Increase font size for "R" */
+  color: #2081c3;
+  /* Blue color for "R" */
   /* Lettering effect for "R" (adjust as needed) */
   letter-spacing: 0.2em;
   text-shadow: 0.1em 0.1em 0.2em rgba(5, 41, 54, 0.3);
 }
 
-.roove-logo span:nth-child(2), .roove-logo span:nth-child(3) {
-  margin-left: -0.3em; /* Adjust spacing to accommodate the bigger "R" */
-  color: #bed8d4; /* Orange color for second and third letters */
+.roove-logo span:nth-child(2),
+.roove-logo span:nth-child(3) {
+  margin-left: -0.3em;
+  /* Adjust spacing to accommodate the bigger "R" */
+  color: #bed8d4;
+  /* Orange color for second and third letters */
 }
 
 .roove-logo span:nth-child(4) {
-  margin-left: -0.1em; /* Adjust spacing for the last letter */
-  color: #78d5d7; /* Orange color for fourth letter */
+  margin-left: -0.1em;
+  /* Adjust spacing for the last letter */
+  color: #78d5d7;
+  /* Orange color for fourth letter */
 }
+
 .roove-logo span:nth-child(5) {
-  margin-left: -0.1em; /* Adjust spacing for the last letter */
-  color: #78d5d7; /* Orange color for fourth letter */
+  margin-left: -0.1em;
+  /* Adjust spacing for the last letter */
+  color: #78d5d7;
+  /* Orange color for fourth letter */
 }
 
 body {
   display: grid;
   background-color: #F7F9F9;
-  grid-template-rows: auto 1fr auto 4%;
+  grid-template-rows: auto 1fr;
 }
 
 nav {
@@ -88,16 +102,21 @@ nav {
 }
 
 .container-fluid {
-  grid-row:2;
+  grid-row: 2;
 }
 
 #matchingUsersPopup {
-  position: relative; /* Relative positioning */
-    grid-row: 3; /* Position after the quote section */
-    justify-tracks: center;
-    display: none; /* Initially hide the pop-up */
-    z-index: 9999; /* Ensure the pop-up is above other elements */
+  position: relative;
+  /* Relative positioning */
+  grid-row: 3;
+  /* Position after the quote section */
+  justify-tracks: center;
+  display: none;
+  /* Initially hide the pop-up */
+  z-index: 9999;
+  /* Ensure the pop-up is above other elements */
 }
+
 footer {
   grid-row: 4 span 1;
 }
@@ -109,30 +128,78 @@ footer {
 }
 
 .user-card {
-  background-color: #f7f9f9; /* Light gray background */
+  background-color: #f7f9f9;
+  /* Light gray background */
   border-radius: 10px;
   padding: 20px;
-  margin: 10px; /* Add margin between cards */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
-  max-width: 500px; /* Limit the width of the user card */
+  margin: 10px;
+  /* Add margin between cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Shadow effect */
+  max-width: 500px;
+  /* Limit the width of the user card */
   width: auto;
 }
 
 .user-card h3 {
-  color: #2081c3; /* Dark blue for the user's name */
+  color: #2081c3;
+  /* Dark blue for the user's name */
   margin-bottom: 10px;
 }
 
 .user-card p {
-  color: #78d5d7; /* Light blue for other details */
+  color: #78d5d7;
+  /* Light blue for other details */
   margin-bottom: 5px;
 }
 
-.nav-link, .custom-color {
+.nav-link,
+.custom-color {
   color: #2081c3;
 }
 
-.centeritem{
-  display:block;
+.centeritem {
+  display: block;
   width: 100%;
+}
+
+/* Styling the button */
+#emailSelectedUsersBtn {
+  background-color: #2081c3;
+  border: none;
+  color: #f7f9f9;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* Change the color of the button when hovered over */
+#emailSelectedUsersBtn:hover {
+  background-color: #78d5d7;
+}
+
+/* Change the color of the button when active (clicked) */
+#emailSelectedUsersBtn:active {
+  background-color: #bed8d4;
+}
+
+.footer {
+  background-color: #f7f9f9;
+  color: #63d2ff;
+  /* Text color */
+  text-align: center;
+  /* Center-align text */
+  padding: 20px 0;
+  /* Add some padding top and bottom */
+  position: fixed;
+  /* Fixed position at the bottom */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* Full width */
 }
