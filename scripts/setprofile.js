@@ -25,8 +25,8 @@ function populateUserInfo() {
                 document.getElementById("petYes").checked = userPetPref === true;
                 document.getElementById("petNo").checked = userPetPref === false;
 
-                // Check if the user has completed profile setup
-                if (!userName || !userCity || !userNumber || userGuestPref === null || userMorningType === null || userPetPref === null) {
+                 // Check if the user has completed profile setup
+                 if (!userName || !userCity || !userNumber || userGuestPref === null || userMorningType === null || userPetPref === null) {
                     isFirstTimeUser = true;
                     // Enable the form fields for editing by default only for the first-time user
                     document.getElementById('personalInfoFields').disabled = false;
@@ -45,32 +45,46 @@ function populateUserInfo() {
 // Call the function to run it 
 populateUserInfo();
 
-function editUserInfo(){
-    document.getElementById('personalInfoFields').ariaDisabled = false;
+//Function to enable the form fields for editing
+function editUserInfo() {
+    document.getElementById('personalInfoFields').disabled = false;
 }
 
-function saveUserInfo(){
-    userName = document.getElementById('nameInput').value;       //get the value of the field with id="nameInput"
-    userCity = document.getElementById('cityInput').value;     //get the value of the field with id="schoolInput"
-    userPetPref = document.getElementById('petInput').value;       //get the value of the field with id="cityInput"
-    userGuestPref = document.getElementById('guestInput').value;       //get the value of the field with id="nameInput"
-    userMorningType = document.getElementById('morningInput').value;     //get the value of the field with id="schoolInput"
-    userNumber = document.getElementById('numberInput').value;       //get the value of the field with id="cityInput"
+// Function to save user information to Firestore
+function saveUserInfo() {
+    // Get user-entered values
+    let userName = document.getElementById('nameInput').value;      
+    let userNumber = document.getElementById('numberInput').value;    
+    let userCity = document.getElementById('cityInput').value;      
+    let userGuestPref = document.querySelector('input[name="guestInput"]:checked').value === "true";
+    let userMorningType = document.querySelector('input[name="morningInput"]:checked').value === "true";
+    let userPetPref = document.querySelector('input[name="petInput"]:checked').value === "true";
 
+    // Update user's document in Firestore
     currentUser.update({
         name: userName,
+        pet: userPetPref,
         city: userCity,
-        petPref: userPetPref,
-        guestPref: userGuestPref,
-        morningType: userMorningType,
-        number: userNumber
-    
+        guest: userGuestPref,
+        morning: userMorningType,
+        number: userNumber,
     })
     .then(() => {
         console.log("Document successfully updated!");
-    })    
+        // Redirect to main page after successful update
+        window.location.href = "main.html"; // Replace "main.html" with the actual URL of your main page
+    })
+    .catch(error => {
+        console.error("Error updating document: ", error);
+        alert("Error updating document. Please try again later.");
+    });
 
+    // Disable edit 
     document.getElementById('personalInfoFields').disabled = true;
 }
+    
+
+
+
 
 
