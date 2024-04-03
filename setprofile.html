@@ -34,7 +34,7 @@
   <!-------------------------------------------->
   <!-- Other libraries and styles of your own -->
   <!-------------------------------------------->
-  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./styles/style.css">
 
 </head>
@@ -45,54 +45,16 @@
   <!------------------------------>
 
   <!-- our own navbar goes here -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Roove</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="main.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
+  <nav id="navbarPlaceholder"></nav>
 
   <!-- the body of your page goes here -->
 
   <div class="container-fluid bg-light text-dark p-5">
     <div class="container bg-light p-5">
-      <h1 class="display-4">Your Profile</h1>
+      <h1 class="display-4 custom-color">Your Profile</h1>
       <hr>
-      <p>Make any changes if needed, then hit submit.</p>
+      <p class="custom-color">The information you provide can help you find a suitable roommate. You need to fill it out when you log in for
+        the first time, but you can also modify it anytime after your setting up.</p>
     </div>
   </div>
 
@@ -104,28 +66,55 @@
     <form>
       <fieldset class="mb-3" id="personalInfoFields" disabled>
         <div class="form-group">
-          <label>Name</label>
+          <label class="custom-color">Name</label>
           <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
         </div>
         <div class="form-group">
-          <label>City</label>
+          <label class="custom-color">City</label>
           <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
         </div>
         <div class="form-group">
-          <label>Phone Number</label>
+          <label class="custom-color">Phone Number</label>
           <input type="text" id="numberInput" class="form-control">
         </div>
+
+        <!-- Do you prefer to have guests come around sometime? -->
         <div class="form-group">
-          <label>Do you prefer to have guests come around sometime?(Enter yes or no)</label>
-          <input type="text" id="guestInput" class="form-control">
+          <label class="custom-color">Do you prefer to have guests come around sometime?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="guestInput" id="guestYes" value="true">
+            <label class="form-check-label" for="guestYes">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="guestInput" id="guestNo" value="false">
+            <label class="form-check-label" for="guestNo">No</label>
+          </div>
         </div>
+
+        <!-- Are you a morning type person? -->
         <div class="form-group">
-          <label>Are you a morning type person?(Enter yes or no)</label>
-          <input type="text" id="morningInput" class="form-control">
+          <label class="custom-color">Are you a morning type person?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="morningInput" id="morningYes" value="true">
+            <label class="form-check-label" for="morningYes">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="morningInput" id="morningNo" value="false">
+            <label class="form-check-label" for="morningNo">No</label>
+          </div>
         </div>
+
+        <!-- Do you mind your roommates having pets? -->
         <div class="form-group">
-          <label>Do you mind your roommates have pets?(Enter yes or no)</label>
-          <input type="text" id="petInput" class="form-control">
+          <label class="custom-color">Do you mind your roommates having pets?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="petInput" id="petYes" value="true">
+            <label class="form-check-label" for="petYes">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="petInput" id="petNo" value="false">
+            <label class="form-check-label" for="petNo">No</label>
+          </div>
         </div>
       </fieldset>
       <div class="d-flex justify-content-end mt-5">
@@ -137,7 +126,7 @@
   </div>
 
   <!-- our own footer goes here-->
-
+  <nav id="footerPlaceholder"></nav>
 
   <!---------------------------------------------->
   <!-- Your own JavaScript functions go here    -->
@@ -145,7 +134,7 @@
   <script src="./scripts/firebaseAPI_bby18.js"></script>
   <script src="./scripts/skeleton.js"></script>
   <script src="./scripts/setprofile.js"></script>
-
+  <script src="./scripts/script.js"></script>
   <script src="./scripts/authentication.js"></script>
 </body>
 

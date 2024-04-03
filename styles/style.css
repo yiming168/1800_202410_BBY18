@@ -1,20 +1,30 @@
-
 /*-------------------------------------
  * customize material design icon sizes 
  *-------------------------------------
  */
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
 .responsive {
-    width: 100%;
-    height: auto;
-  }
+  width: 100%;
+  height: auto;
+}
 
-.centerimg{
+.centerimg {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -22,7 +32,7 @@
   height: 20%;
 }
 
-.fitimg{
+.fitimg {
   width: 100vw;
   height: auto;
 }
@@ -34,3 +44,95 @@
   align-items:center;
 }
 
+.roove-logo {
+  display: flex;
+  align-items: center;
+  font-family: sans-serif; /* Change this if you prefer a different font */
+}
+
+.roove-logo span {
+  position: relative; /* Needed for relative positioning of the "R" */
+  font-size: 1.5em;  /* Base size for all letters */
+}
+
+.roove-logo span:nth-child(1) {  /* Style for the "R" */
+  font-size: 2em;  /* Increase font size for "R" */
+  color: #2081c3; /* Blue color for "R" */
+  /* Lettering effect for "R" (adjust as needed) */
+  letter-spacing: 0.2em;
+  text-shadow: 0.1em 0.1em 0.2em rgba(5, 41, 54, 0.3);
+}
+
+.roove-logo span:nth-child(2), .roove-logo span:nth-child(3) {
+  margin-left: -0.3em; /* Adjust spacing to accommodate the bigger "R" */
+  color: #bed8d4; /* Orange color for second and third letters */
+}
+
+.roove-logo span:nth-child(4) {
+  margin-left: -0.1em; /* Adjust spacing for the last letter */
+  color: #78d5d7; /* Orange color for fourth letter */
+}
+.roove-logo span:nth-child(5) {
+  margin-left: -0.1em; /* Adjust spacing for the last letter */
+  color: #78d5d7; /* Orange color for fourth letter */
+}
+
+body {
+  display: grid;
+  background-color: F7F9F9;
+  grid-template-rows: auto 1fr auto;
+}
+
+nav {
+  grid-row: 1;
+}
+
+.container-fluid {
+  grid-row:2;
+}
+
+#matchingUsersPopup {
+  position: relative; /* Relative positioning */
+    grid-row: 3; /* Position after the quote section */
+    justify-tracks: center;
+    display: none; /* Initially hide the pop-up */
+    z-index: 9999; /* Ensure the pop-up is above other elements */
+}
+footer {
+  grid-row: 4;
+}
+
+#matchingUsersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.user-card {
+  background-color: #f7f9f9; /* Light gray background */
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px; /* Add margin between cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  max-width: 500px; /* Limit the width of the user card */
+  width: auto;
+}
+
+.user-card h3 {
+  color: #2081c3; /* Dark blue for the user's name */
+  margin-bottom: 10px;
+}
+
+.user-card p {
+  color: #78d5d7; /* Light blue for other details */
+  margin-bottom: 5px;
+}
+
+.nav-link, .custom-color {
+  color: #2081c3;
+}
+
+.centeritem{
+  display:block;
+  width: 100%;
+}
