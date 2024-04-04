@@ -139,11 +139,29 @@ function displayMatchedUsersPopup(matchedUsers) {
     userCard.classList.add('user-card');
     userCard.innerHTML = `
       <input type="checkbox" class="user-checkbox">
-      <h3>${user.name}</h3>
+      <h3 class="user-name">${user.name}</h3>
       <p class="user-email">Email: ${user.email}</p>
-      <p>Phone: ${user.number}</p>
-      <p>CIty: ${user.city}</p>
+      <p class="user-city">City: ${user.city}</p>
+      <p class="user-phone" style="display:none;">Phone: ${user.number}</p>
+      <p class="user-description" style="display:none;">Description: ${user.description}</p>
     `;
+    
+    // Add event listener to display additional information when mouse is moved over the user card
+    userCard.addEventListener('mouseover', () => {
+      const userPhone = userCard.querySelector('.user-phone');
+      const userDescription = userCard.querySelector('.user-description');
+      userPhone.style.display = 'block';
+      userDescription.style.display = 'block';
+    });
+
+    // Add event listener to hide additional information when mouse moves away from the user card
+    userCard.addEventListener('mouseout', () => {
+      const userPhone = userCard.querySelector('.user-phone');
+      const userDescription = userCard.querySelector('.user-description');
+      userPhone.style.display = 'none';
+      userDescription.style.display = 'none';
+    });
+
     container.appendChild(userCard);
   });
 
@@ -151,7 +169,6 @@ function displayMatchedUsersPopup(matchedUsers) {
   const popup = document.getElementById('matchingUsersPopup');
   popup.style.display = 'block';
 }
-
 // Auto-fetch matched users when the user is logged in
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
@@ -221,25 +238,17 @@ function emailSelectedUsers() {
   checkboxes.forEach(checkbox => {
     if (checkbox.checked) {
       const userCard = checkbox.closest('.user-card');
-      const userData = {
-        name: userCard.querySelector('h3').textContent,
-        email: userCard.querySelector('.user-email').textContent
-      };
-      selectedUsers.push(userData);
+      const userEmail = userCard.querySelector('.user-email').textContent.replace('Email: ', ''); // Extract email without "Email: " prefix
+      selectedUsers.push(userEmail);
     }
   });
 
   if (selectedUsers.length > 0) {
-    // Update user status to "proposed" before sending the email
-    selectedUsers.forEach(user => {
-      updateUserStatus(user.email);
-    });
-
     // Compose email content
     const emailContent = "Hi. We have the same preference of renting. If you are still interested in renting a room, we can rent together.";
 
     // Construct mailto link with email content and selected email addresses
-    const emailAddresses = selectedUsers.map(user => user.email).join(',');
+    const emailAddresses = selectedUsers.join(',');
     const emailSubject = "Roommate Match Proposal";
     const mailtoLink = `mailto:${emailAddresses}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailContent)}`;
 
@@ -250,6 +259,7 @@ function emailSelectedUsers() {
     alert("Please select at least one user to email.");
   }
 }
+
 
 // Function to update user status to "proposed" in Firestore
 function updateUserStatus(email) {
