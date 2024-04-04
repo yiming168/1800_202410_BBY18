@@ -129,6 +129,47 @@ function queryMatchingUsers(loggedInUserPreferences) {
   });
 }
 
+// // Function to display matched users in the popup
+// function displayMatchedUsersPopup(matchedUsers) {
+//   const container = document.getElementById('matchingUsersContainer');
+//   container.innerHTML = ''; // Clear previous content
+
+//   matchedUsers.forEach(user => {
+//     const userCard = document.createElement('div');
+//     userCard.classList.add('user-card');
+//     userCard.innerHTML = `
+//       <input type="checkbox" class="user-checkbox">
+//       <h3 class="user-name">${user.name}</h3>
+//       <p class="user-email">Email: ${user.email}</p>
+//       <p class="user-city">City: ${user.city}</p>
+//       <p class="user-phone" style="display:none;">Phone: ${user.number}</p>
+//       <p class="user-description" style="display:none;">Description: ${user.description}</p>
+//     `;
+    
+//     // Add event listener to display additional information when mouse is moved over the user card
+//     userCard.addEventListener('mouseover', () => {
+//       const userPhone = userCard.querySelector('.user-phone');
+//       const userDescription = userCard.querySelector('.user-description');
+//       userPhone.style.display = 'block';
+//       userDescription.style.display = 'block';
+//     });
+
+//     // Add event listener to hide additional information when mouse moves away from the user card
+//     userCard.addEventListener('mouseout', () => {
+//       const userPhone = userCard.querySelector('.user-phone');
+//       const userDescription = userCard.querySelector('.user-description');
+//       userPhone.style.display = 'none';
+//       userDescription.style.display = 'none';
+//     });
+
+//     container.appendChild(userCard);
+//   });
+
+//   // Display the popup
+//   const popup = document.getElementById('matchingUsersPopup');
+//   popup.style.display = 'block';
+// }
+
 // Function to display matched users in the popup
 function displayMatchedUsersPopup(matchedUsers) {
   const container = document.getElementById('matchingUsersContainer');
@@ -145,21 +186,19 @@ function displayMatchedUsersPopup(matchedUsers) {
       <p class="user-phone" style="display:none;">Phone: ${user.number}</p>
       <p class="user-description" style="display:none;">Description: ${user.description}</p>
     `;
-    
-    // Add event listener to display additional information when mouse is moved over the user card
-    userCard.addEventListener('mouseover', () => {
-      const userPhone = userCard.querySelector('.user-phone');
-      const userDescription = userCard.querySelector('.user-description');
-      userPhone.style.display = 'block';
-      userDescription.style.display = 'block';
-    });
 
-    // Add event listener to hide additional information when mouse moves away from the user card
-    userCard.addEventListener('mouseout', () => {
+    // Add event listener to toggle additional information when user clicks on the user card
+    userCard.addEventListener('click', () => {
       const userPhone = userCard.querySelector('.user-phone');
       const userDescription = userCard.querySelector('.user-description');
-      userPhone.style.display = 'none';
-      userDescription.style.display = 'none';
+      // Toggle the display of additional information
+      if (userPhone.style.display === 'none') {
+        userPhone.style.display = 'block';
+        userDescription.style.display = 'block';
+      } else {
+        userPhone.style.display = 'none';
+        userDescription.style.display = 'none';
+      }
     });
 
     container.appendChild(userCard);

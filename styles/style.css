@@ -239,3 +239,9 @@ footer {
   /* Adjust styles to give a hover effect */
   border-color: #78d5d7; /* Change this color as needed */
 }
+
+#hint {
+  color: #78d5d7;
+  font-size: small;
+
+}
