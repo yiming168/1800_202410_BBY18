@@ -142,13 +142,13 @@ footer {
 }
 
 .user-card h3 {
-  color: #2081c3;
+  color: #63d2ff;
   /* Dark blue for the user's name */
   margin-bottom: 10px;
 }
 
 .user-card p {
-  color: #78d5d7;
+  color: #2081c3;
   /* Light blue for other details */
   margin-bottom: 5px;
 }
@@ -203,3 +203,39 @@ footer {
   position: relative;
 }
 
+/* CSS for styling the checkbox */
+.user-checkbox {
+  /* Increase the size of the checkbox */
+  width: 20px;
+  height: 20px;
+  /* Make the checkbox round */
+  border-radius: 50%;
+  /* Add a border to the checkbox */
+  border: 2px solid #bed8d4;
+  /* Make the checkbox background transparent */
+  background-color: transparent;
+  /* Ensure the checkbox is positioned relative to its container */
+  position: relative;
+  /* Hide the default checkbox */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Cursor pointer to indicate interactivity */
+  cursor: pointer;
+}
+
+/* Style the appearance of the checkbox when checked */
+.user-checkbox:checked {
+  /* Change the background color when checked */
+  background-color: #2081c3; /* Change this color as needed */
+  /* Add a checkmark inside the checkbox */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M5.5 12.5l2.5 3.5 4.5-4.5"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Style the appearance of the checkbox when hovered */
+.user-checkbox:hover {
+  /* Adjust styles to give a hover effect */
+  border-color: #78d5d7; /* Change this color as needed */
+}
