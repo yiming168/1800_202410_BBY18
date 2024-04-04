@@ -29,7 +29,7 @@
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
-  height: fit-content;
+  height: 150px;
 }
 
 .fitimg {
@@ -196,10 +196,10 @@ footer {
   /* Center-align text */
   padding: 20px 0;
   /* Add some padding top and bottom */
-  position: fixed;
-  /* Fixed position at the bottom */
   left: 0;
   bottom: 0;
   width: 100%;
   /* Full width */
+  position: relative;
 }
+

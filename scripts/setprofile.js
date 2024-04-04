@@ -12,10 +12,12 @@ function populateUserInfo() {
                 let userGuestPref = userDoc.data().guest || false;
                 let userMorningType = userDoc.data().morning || false;
                 let userPetPref = userDoc.data().pet || false;
+                let userDescription = userDoc.data().description || "";
 
                 document.getElementById("nameInput").value = userName;
                 document.getElementById("numberInput").value = userNumber;
                 document.getElementById("cityInput").value = userCity;
+                document.getElementById("descriptionInput").value = userDescription;
                 
                 // Set radio button states based on user preferences
                 document.getElementById("guestYes").checked = userGuestPref === true;
@@ -55,7 +57,8 @@ function saveUserInfo() {
     // Get user-entered values
     let userName = document.getElementById('nameInput').value;      
     let userNumber = document.getElementById('numberInput').value;    
-    let userCity = document.getElementById('cityInput').value;      
+    let userCity = document.getElementById('cityInput').value;
+    let userDescription = document.getElementById('descriptionInput').value;      
     let userGuestPref = document.querySelector('input[name="guestInput"]:checked').value === "true";
     let userMorningType = document.querySelector('input[name="morningInput"]:checked').value === "true";
     let userPetPref = document.querySelector('input[name="petInput"]:checked').value === "true";
@@ -68,6 +71,7 @@ function saveUserInfo() {
         guest: userGuestPref,
         morning: userMorningType,
         number: userNumber,
+        description: userDescription,
     })
     .then(() => {
         console.log("Document successfully updated!");

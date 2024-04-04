@@ -49,7 +49,7 @@
 
   <!-- the body of your page goes here -->
 
-  <div class="container-fluid bg-light text-dark p-5">
+  <div class="profileIntro container-fluid bg-light text-dark p-5">
     <div class="container bg-light p-5">
       <h1 class="display-4 custom-color">Your Profile</h1>
       <hr>
@@ -62,7 +62,7 @@
     alt="basicprofileimage">
   <br />
 
-  <div class="container">
+  <div class="profileContainer container">
     <form>
       <fieldset class="mb-3" id="personalInfoFields" disabled>
         <div class="form-group">
@@ -116,6 +116,13 @@
             <label class="form-check-label" for="petNo">No</label>
           </div>
         </div>
+
+        <!--text description of user profile-->
+        <div class="form-group">
+          <label class="custom-color">Anything sepcial about you or your other preference about renting?</label>
+          <textarea id = "descriptionInput" class="form-control" aria-label="With textarea"></textarea>
+        </div>
+
       </fieldset>
       <div class="d-flex justify-content-end mt-5">
         <button type="button" class="btn btn-secondary" onclick="editUserInfo()">Edit</button>
@@ -126,7 +133,7 @@
   </div>
 
   <!-- our own footer goes here-->
-  <footer class="footer">
+  <footer class="profileFooter footer">
   <nav id="footerPlaceholder"></nav></footer>
 
   <!---------------------------------------------->
