@@ -313,3 +313,30 @@ function updateUserStatus(email) {
       console.error("Error updating user status:", error);
     });
 }
+document.addEventListener('DOMContentLoaded', function() {
+// Add this inside the script.js file
+function submitFeedback() {
+  const feedbackText = document.getElementById('feedbackText').value;
+
+  // Add a new feedback document with a generated id.
+  db.collection("feedback").add({
+    text: feedbackText,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  })
+  .then(() => {
+    console.log("Feedback submitted successfully");
+    // You can add code here to close the modal and reset the form
+    $('#feedbackModal').modal('hide');
+    document.getElementById('feedbackForm').reset();
+  })
+  .catch((error) => {
+    console.error("Error submitting feedback: ", error);
+  });
+}
+
+// Event listener for feedback form submission
+document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  submitFeedback();
+});
+});
