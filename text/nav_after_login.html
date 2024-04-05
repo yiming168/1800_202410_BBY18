@@ -13,5 +13,28 @@
         <a class="nav-link" href="../setprofile.html">Set Profile</a>
         <button id="feedbackButton" class="nav-link" data-bs-toggle="modal" data-bs-target="#feedbackModal">Feedback</button>
         <a class="btn btn-outline-success" href="../index.html" id="logoutlink">Logout</a>
+
+
+          <!-- Feedback Modal (insert right here) -->
+   <!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="feedbackModalLabel">Submit Feedback</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="feedbackForm">
+            <div class="mb-3">
+              <label for="feedbackText" class="form-label">Your Feedback</label>
+              <textarea class="form-control" id="feedbackText" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
     </div>
 </nav>

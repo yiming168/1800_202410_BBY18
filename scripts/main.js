@@ -313,6 +313,7 @@ function updateUserStatus(email) {
       console.error("Error updating user status:", error);
     });
 }
+
 document.addEventListener('DOMContentLoaded', function() {
 // Add this inside the script.js file
 function submitFeedback() {
