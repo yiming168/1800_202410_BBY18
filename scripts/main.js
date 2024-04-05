@@ -317,21 +317,28 @@ document.addEventListener('DOMContentLoaded', function() {
 // Add this inside the script.js file
 function submitFeedback() {
   const feedbackText = document.getElementById('feedbackText').value;
+  const user = firebase.auth().currentUser;
 
-  // Add a new feedback document with a generated id.
-  db.collection("feedback").add({
-    text: feedbackText,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-  })
-  .then(() => {
-    console.log("Feedback submitted successfully");
-    // You can add code here to close the modal and reset the form
-    $('#feedbackModal').modal('hide');
-    document.getElementById('feedbackForm').reset();
-  })
-  .catch((error) => {
-    console.error("Error submitting feedback: ", error);
-  });
+  if (user) {
+    // Add a new feedback document with a generated id and include the user's UID.
+    db.collection("feedback").add({
+      text: feedbackText,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      userId: user.uid  // Include the user's ID
+    })
+    .then(() => {
+      console.log("Feedback submitted successfully");
+      // You can add code here to close the modal and reset the form
+      $('#feedbackModal').modal('hide');
+      document.getElementById('feedbackForm').reset();
+    })
+    .catch((error) => {
+      console.error("Error submitting feedback: ", error);
+    });
+  } else {
+    console.error("No user is signed in to submit feedback.");
+    // Handle the case where no user is signed in, such as displaying a message or prompting sign-in
+  }
 }
 
 // Event listener for feedback form submission
