@@ -352,6 +352,7 @@ function updateUserStatus(email) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
 // Add this inside the script.js file
 function submitFeedback() {
   const feedbackText = document.getElementById('feedbackText').value;
@@ -385,3 +386,4 @@ document.getElementById('feedbackForm').addEventListener('submit', function(even
   submitFeedback();
 });
 });
+})

@@ -246,15 +246,27 @@ footer {
 
 }
 
-.modal-header {
-color: #2081c3;
-background-color: #0dcaf0;;
+/* Styling the button */
+#custom-button {
+  background-color: #2081c3;
+  border: none;
+  color: #f7f9f9;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
 }
 
-.modal-body{
-  background-color: #f7f9f9;
-}
+/* Change the color of the button when hovered over
+#custom-button {
+  background-color: #78d5d7;
+} */
 
-.btn-primary{
-background-color: #2081c3;
-}
+/* Change the color of the button when active (clicked) */
+/* #custom-button {
+  background-color: #bed8d4;
+} */
