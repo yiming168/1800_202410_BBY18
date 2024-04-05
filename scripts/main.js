@@ -15,13 +15,28 @@ function handleLogout() {
   logoutLink.addEventListener('click', handleLogout);
 
 }
-
+document.addEventListener('DOMContentLoaded', function() {
 // Function to read the quote of the day from the Firestore "quotes" collection
 // Input param is the String representing the day of the week, aka, the document name
 function readQuote(day) {
   db.collection("quotes").doc(day)                                                      //name of the collection and documents should matach excatly with what you have in Firestore
-  .onSnapshot(dayDoc => {                                                               //arrow notation
-    console.log("current document data: " + dayDoc.data());                          //.data() returns data object
+  .onSnapshot(dayDoc => {
+    if (!dayDoc.exists) {
+      console.error("No such quote document!");
+      return;
+    }
+    if (!dayDoc.data().hasOwnProperty('quote')) {
+      console.error("The document doesn't have a quote field!");
+      return;
+    }
+    const quoteElement = document.getElementById("quote-goes-here");
+    if (!quoteElement) {
+      console.error("No element found with ID 'quote-goes-here'");
+      return;
+    }                                                               //arrow notation
+    console.log("current document data: " + dayDoc.data());
+    quoteElement.innerHTML = dayDoc.data().quote;
+  }, error => {                          //.data() returns data object
     document.getElementById("quote-goes-here").innerHTML = dayDoc.data().quote;      //using javascript to display the data on the right place
 
     //Here are other ways to access key-value data fields
@@ -272,33 +287,56 @@ displayGreeting();
 // Function to email selected users
 function emailSelectedUsers() {
   const selectedUsers = [];
-  const checkboxes = document.querySelectorAll('.user-card input[type="checkbox"]');
+  const selectedUserIDs = []; 
+  const currentUser = firebase.auth().currentUser; // Get the current logged-in user
+  const checkboxes = document.querySelectorAll('.user-card input[type="checkbox"]:checked');
 
-  checkboxes.forEach(checkbox => {
-    if (checkbox.checked) {
+  if (currentUser && checkboxes.length > 0) {
+    checkboxes.forEach(checkbox => {
       const userCard = checkbox.closest('.user-card');
-      const userEmail = userCard.querySelector('.user-email').textContent.replace('Email: ', ''); // Extract email without "Email: " prefix
+      const userID = userCard.getAttribute('data-user-id'); // Ensure you have 'data-user-id' attribute in your user cards
+      selectedUserIDs.push(userID);
+      const userEmail = userCard.querySelector('.user-email').textContent.replace('Email: ', '');
       selectedUsers.push(userEmail);
-    }
-  });
+    });
+    console.log("Selected users' emails:", selectedUsers);
 
-  if (selectedUsers.length > 0) {
     // Compose email content
     const emailContent = "Hi. We have the same preference of renting. If you are still interested in renting a room, we can rent together.";
-
-    // Construct mailto link with email content and selected email addresses
     const emailAddresses = selectedUsers.join(',');
     const emailSubject = "Roommate Match Proposal";
     const mailtoLink = `mailto:${emailAddresses}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailContent)}`;
+    window.open(mailtoLink, '_blank');
 
-    // Open email composition in a new window
-    const emailWindow = window.open(mailtoLink, '_blank');
-
+    // Update the status of the selected users and the current user in Firestore
+    updateUserProposalList(firebase.auth().currentUser.uid, selectedUserIDs);
   } else {
-    alert("Please select at least one user to email.");
+    console.log("Please select at least one user or log in.");
   }
 }
+function updateUserProposalList(userId, selectedUserIDs) {
+  const userRef = db.collection("users").doc(userId);
 
+  // Use a transaction to ensure atomic update
+  return db.runTransaction(transaction => {
+    return transaction.get(userRef).then(userDoc => {
+      if (!userDoc.exists) {
+        throw "Document does not exist!";
+      }
+
+      // Compute the new array of proposedTo user IDs
+      const currentProposals = userDoc.data().proposedTo || [];
+      const newProposals = [...new Set([...currentProposals, ...selectedUserIDs])];
+
+      transaction.update(userRef, { proposedTo: newProposals });
+      return newProposals;
+    });
+  }).then(newProposals => {
+    console.log(`Updated proposedTo list for user ${userId}:`, newProposals);
+  }).catch(error => {
+    console.error("Transaction failed: ", error);
+  });
+}
 
 // Function to update user status to "proposed" in Firestore
 function updateUserStatus(email) {
@@ -313,7 +351,7 @@ function updateUserStatus(email) {
       console.error("Error updating user status:", error);
     });
 }
-document.addEventListener('DOMContentLoaded', function() {
+
 // Add this inside the script.js file
 function submitFeedback() {
   const feedbackText = document.getElementById('feedbackText').value;

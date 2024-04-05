@@ -247,5 +247,14 @@ footer {
 }
 
 .modal-header {
+color: #2081c3;
+background-color: #0dcaf0;;
+}
 
+.modal-body{
+  background-color: #f7f9f9;
+}
+
+.btn-primary{
+background-color: #2081c3;
 }
