@@ -15,7 +15,7 @@ function handleLogout() {
   logoutLink.addEventListener('click', handleLogout);
 
 }
-document.addEventListener('DOMContentLoaded', function() {
+
 // Function to read the quote of the day from the Firestore "quotes" collection
 // Input param is the String representing the day of the week, aka, the document name
 function readQuote(day) {
@@ -286,6 +286,7 @@ displayGreeting();
 
 // Function to email selected users
 function emailSelectedUsers() {
+  console.log("ngdnfgin");
   const selectedUsers = [];
   const selectedUserIDs = []; 
   const currentUser = firebase.auth().currentUser; // Get the current logged-in user
@@ -338,20 +339,6 @@ function updateUserProposalList(userId, selectedUserIDs) {
   });
 }
 
-// Function to update user status to "proposed" in Firestore
-function updateUserStatus(email) {
-  // Update user status to "proposed" in Firestore
-  db.collection("users").where("email", "==", email).get()
-    .then(querySnapshot => {
-      querySnapshot.forEach(doc => {
-        doc.ref.update({ status: "proposed" });
-      });
-    })
-    .catch(error => {
-      console.error("Error updating user status:", error);
-    });
-}
-
 document.addEventListener('DOMContentLoaded', function() {
 // Add this inside the script.js file
 function submitFeedback() {
@@ -380,10 +367,11 @@ function submitFeedback() {
   }
 }
 
-// Event listener for feedback form submission
-document.getElementById('feedbackForm').addEventListener('submit', function(event) {
-  event.preventDefault();
-  submitFeedback();
+
 });
-});
-})
+
+// // Event listener for feedback form submission
+// document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+//   // event.preventDefault();
+//   submitFeedback();
+// });
