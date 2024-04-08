@@ -141,6 +141,11 @@ footer {
   width: auto;
 }
 
+.user-card:hover {
+  background-color: #f0f0f0; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Change box-shadow on hover */
+  cursor: pointer; /* Change cursor to a pointer */
+}
 .user-card h3 {
   color: #63d2ff;
   /* Dark blue for the user's name */
@@ -208,8 +213,6 @@ footer {
   /* Increase the size of the checkbox */
   width: 20px;
   height: 20px;
-  /* Make the checkbox round */
-  border-radius: 50%;
   /* Add a border to the checkbox */
   border: 2px solid #bed8d4;
   /* Make the checkbox background transparent */
@@ -261,12 +264,6 @@ footer {
   border-radius: 8px;
 }
 
-/* Change the color of the button when hovered over
-#custom-button {
-  background-color: #78d5d7;
-} */
-
-/* Change the color of the button when active (clicked) */
-/* #custom-button {
-  background-color: #bed8d4;
-} */
+.profile-picture {
+  display: none; /* Hide the profile picture by default */
+}

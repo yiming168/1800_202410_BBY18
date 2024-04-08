@@ -196,6 +196,7 @@ function displayMatchedUsersPopup(matchedUsers) {
     userCard.innerHTML = `
       <input type="checkbox" class="user-checkbox">
       <h3 class="user-name">${user.name}</h3>
+      <img class="profile-picture" src="${user.profilePic}" alt="profilePic" width="200" height="200"/>
       <p class="user-email">Email: ${user.email}</p>
       <p class="user-city">City: ${user.city}</p>
       <p class="user-phone" style="display:none;">Phone: ${user.number}</p>
@@ -206,13 +207,16 @@ function displayMatchedUsersPopup(matchedUsers) {
     userCard.addEventListener('click', () => {
       const userPhone = userCard.querySelector('.user-phone');
       const userDescription = userCard.querySelector('.user-description');
+      const profilePicture = userCard.querySelector('.profile-picture');
       // Toggle the display of additional information
       if (userPhone.style.display === 'none') {
         userPhone.style.display = 'block';
         userDescription.style.display = 'block';
+        profilePicture.style.display = 'block';
       } else {
         userPhone.style.display = 'none';
         userDescription.style.display = 'none';
+        profilePicture.style.display = 'none';
       }
     });
 
