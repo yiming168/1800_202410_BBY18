@@ -1,9 +1,11 @@
-function handleLogout() {
+// Function to handle logout
+function handleLogout(event) {
   event.preventDefault(); // Prevent default anchor link behavior
   try {
     firebase.auth().signOut().then(() => {
       console.log('User logged out successfully');
-      // Add logic to update UI or redirect (optional)
+      // Redirect to index.html after logout
+      window.location.href = "index.html";
     }).catch((error) => {
       console.error('Error logging out:', error);
     });
@@ -11,10 +13,10 @@ function handleLogout() {
     // Handle any errors in the signOut process
     console.error(error);
   }
-  const logoutLink = document.getElementById('logoutLink');
-  logoutLink.addEventListener('click', handleLogout);
-
 }
+// Add event listener to the logout link
+const logoutLink = document.getElementById('logoutLink');
+logoutLink.addEventListener('click', handleLogout);
 
 // Function to read the quote of the day from the Firestore "quotes" collection
 // Input param is the String representing the day of the week, aka, the document name
@@ -385,8 +387,8 @@ function submitFeedback() {
 
 });
 
-// // Event listener for feedback form submission
-// document.getElementById('feedbackForm').addEventListener('submit', function(event) {
-//   // event.preventDefault();
-//   submitFeedback();
-// });
+// Event listener for feedback form submission
+document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+  // event.preventDefault();
+  submitFeedback();
+});
