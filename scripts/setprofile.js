@@ -33,19 +33,18 @@ function populateUserInfo() {
                     isFirstTimeUser = true;
                     // Enable the form fields for editing by default only for the first-time user
                     document.getElementById('personalInfoFields').disabled = false;
-                }
-                if (picUrl != null){
-                    console.log(picUrl);
-                                    // use this line if "mypicdiv" is a "div"
-                    //$("#mypicdiv").append("<img src='" + picUrl + "'>")
-                    $("#mypic-goes-here").attr("src", picUrl);
-                } 
-                else {
+                } else {
                     isFirstTimeUser = false;
                     // Disable the form fields for editing by default for other users
                     document.getElementById('personalInfoFields').disabled = true;
                 }
-                
+
+                if (picUrl != null) {
+                    console.log(picUrl);
+                    // use this line if "mypicdiv" is a "div"
+                    //$("#mypicdiv").append("<img src='" + picUrl + "'>")
+                    $("#mypic-goes-here").attr("src", picUrl);
+                }
             });
         } else {
             console.log("No user is signed in");
@@ -55,6 +54,7 @@ function populateUserInfo() {
 
 // Call the function to run it 
 populateUserInfo();
+
 
 //Function to enable the form fields for editing
 function editUserInfo() {
@@ -86,6 +86,27 @@ function chooseFileListener() {
 }
 chooseFileListener();
 
+// Function to display a thank-you message
+function displayThankYouMessage() {
+    // Create a new element for the message
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('alert', 'alert-success', 'mt-3');
+    messageElement.setAttribute('role', 'alert');
+    messageElement.innerHTML = 'Thank you for setting up your profile! You can now edit your information below.';
+
+    // Get the container where the message will be displayed
+    const container = document.querySelector('.profileContainer');
+
+    // Insert the message before the form
+    container.insertBefore(messageElement, container.firstChild);
+
+    // Remove the message after 2 seconds
+    setTimeout(() => {
+        messageElement.remove();
+    }, 2000);
+}
+
+
 function saveUserInfo() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) { // Check if user is logged in
@@ -100,7 +121,7 @@ function saveUserInfo() {
                     storageRef.getDownloadURL()
                         .then(function (url) { // Get "url" of the uploaded file
                             console.log("Got the download URL.");
-                            
+
                             // Get user-entered values
                             let userName = document.getElementById('nameInput').value;
                             let userNumber = document.getElementById('numberInput').value;
@@ -121,15 +142,17 @@ function saveUserInfo() {
                                 description: userDescription,
                                 profilePic: url // Assuming "profilePic" is the correct field name in Firestore
                             })
-                            .then(() => {
-                                console.log("Document successfully updated!");
-                                // Redirect to main page after successful update
-                                window.location.href = "main.html"; // Ensure this URL is correct
-                            })
-                            .catch(error => {
-                                console.error("Error updating document: ", error);
-                                alert("Error updating document. Please try again later.");
-                            });
+                                .then(() => {
+                                    console.log("Document successfully updated!");
+                                    // Redirect to main page after successful update
+                                    window.location.href = "main.html"; // Ensure this URL is correct
+                                    // Display thank-you message for first-time users
+                                    displayThankYouMessage();
+                                })
+                                .catch(error => {
+                                    console.error("Error updating document: ", error);
+                                    alert("Error updating document. Please try again later.");
+                                });
 
                             // Disable edit 
                             document.getElementById('personalInfoFields').disabled = true;
