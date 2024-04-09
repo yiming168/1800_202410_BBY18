@@ -193,30 +193,40 @@ function displayMatchedUsersPopup(matchedUsers) {
   matchedUsers.forEach(user => {
     const userCard = document.createElement('div');
     userCard.classList.add('user-card');
-    userCard.innerHTML = `
+    
+    // Initialize the user card content with common elements
+    let userCardContent = `
       <input type="checkbox" class="user-checkbox">
       <h3 class="user-name">${user.name}</h3>
-      <img class="profile-picture" src="${user.profilePic}" alt="profilePic" width="200" height="200"/>
       <p class="user-email">Email: ${user.email}</p>
       <p class="user-city">City: ${user.city}</p>
       <p class="user-phone" style="display:none;">Phone: ${user.number}</p>
       <p class="user-description" style="display:none;">Description: ${user.description}</p>
     `;
+    
+    // Check if user has a profile picture
+    if (user.profilePic) {
+      userCardContent += `<img class="profile-picture" src="${user.profilePic}" alt="profilePic" width="200" height="200"/>`;
+    }
+    
+    // Set the user card HTML content
+    userCard.innerHTML = userCardContent;
 
     // Add event listener to toggle additional information when user clicks on the user card
     userCard.addEventListener('click', () => {
       const userPhone = userCard.querySelector('.user-phone');
       const userDescription = userCard.querySelector('.user-description');
       const profilePicture = userCard.querySelector('.profile-picture');
+      
       // Toggle the display of additional information
       if (userPhone.style.display === 'none') {
         userPhone.style.display = 'block';
         userDescription.style.display = 'block';
-        profilePicture.style.display = 'block';
+        if (profilePicture) profilePicture.style.display = 'block'; // Show profile picture only if it exists
       } else {
         userPhone.style.display = 'none';
         userDescription.style.display = 'none';
-        profilePicture.style.display = 'none';
+        if (profilePicture) profilePicture.style.display = 'none'; // Hide profile picture only if it exists
       }
     });
 
@@ -227,6 +237,7 @@ function displayMatchedUsersPopup(matchedUsers) {
   const popup = document.getElementById('matchingUsersPopup');
   popup.style.display = 'block';
 }
+
 // Auto-fetch matched users when the user is logged in
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
