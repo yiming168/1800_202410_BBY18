@@ -231,10 +231,16 @@ footer {
 .user-checkbox:checked {
   /* Change the background color when checked */
   background-color: #2081c3; /* Change this color as needed */
-  /* Add a checkmark inside the checkbox */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M5.5 12.5l2.5 3.5 4.5-4.5"/></svg>');
   background-repeat: no-repeat;
   background-position: center;
+}
+/* Display a checkmark inside the checkbox when checked */
+.user-checkbox:checked::before {
+  content: '\2713'; /* Unicode character for a checkmark */
+  font-size: 16px; /* Adjust the size of the checkmark as needed */
+  color: #f7f9f9; /* Color of the checkmark */
+  text-align: center;
+  line-height: 20px; /* Match the height of the checkbox */
 }
 
 /* Style the appearance of the checkbox when hovered */
