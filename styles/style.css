@@ -267,3 +267,41 @@ footer {
 .profile-picture {
   display: none; /* Hide the profile picture by default */
 }
+
+/* Hide the original file input */
+#mypic-input {
+  display: none;
+}
+
+/* Style the label to look like a button */
+.custom-file-upload {
+  display: block; /* Makes the element a block-level element */
+  width: fit-content; /* Ensures the width is just enough to fit its content */
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #17a2b8; /* Bootstrap info button background color */
+  color: white; /* Text color */
+  border: none;
+  border-radius: .25rem;
+  font-size: 1rem;
+  margin: 10px auto; /* Centers the button horizontally and adds vertical spacing */
+  text-align: center; /* Centers the text inside the button */
+}
+
+
+/* You might already have button styles from Bootstrap you want to match */
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+#mypic-input,
+label[for="mypic-input"] {
+  display: none;
+}
+
+
+
+
+
+

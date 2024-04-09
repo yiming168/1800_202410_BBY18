@@ -53,7 +53,8 @@
     <div class="container bg-light p-5">
       <h1 class="display-4 custom-color">Your Profile</h1>
       <hr>
-      <p class="custom-color">The information you provide can help you find a suitable roommate. You need to fill it out when you log in for
+      <p class="custom-color">The information you provide can help you find a suitable roommate. You need to fill it out
+        when you log in for
         the first time, but you can also modify it anytime after your setting up.</p>
     </div>
   </div>
@@ -62,9 +63,13 @@
     <form>
       <fieldset class="mb-3" id="personalInfoFields" disabled>
         <div class="container text-center py-3">
-          <img id="mypic-goes-here" src="images/blah.jpg" width=200 height=200/>
+          <img id="mypic-goes-here" src="images/blah.jpg" width="200" height="200" />
           <input type="file" id="mypic-input" accept="image/*" />
-      </div>
+          <label for="mypic-input" class="custom-file-upload">
+            Choose File
+          </label>
+        </div>
+
         <div class="form-group">
           <label class="custom-color">Name</label>
           <input type="text" id="nameInput" class="form-control custom-color" placeholder="Enter your name">
@@ -120,7 +125,7 @@
         <!--text description of user profile-->
         <div class="form-group">
           <label class="custom-color">Anything sepcial about you or your other preference about renting?</label>
-          <textarea id = "descriptionInput" class="form-control custom-color" aria-label="With textarea"></textarea>
+          <textarea id="descriptionInput" class="form-control custom-color" aria-label="With textarea"></textarea>
         </div>
 
       </fieldset>
@@ -134,7 +139,8 @@
 
   <!-- our own footer goes here-->
   <footer class="profileFooter footer">
-  <nav id="footerPlaceholder"></nav></footer>
+    <nav id="footerPlaceholder"></nav>
+  </footer>
 
   <!---------------------------------------------->
   <!-- Your own JavaScript functions go here    -->

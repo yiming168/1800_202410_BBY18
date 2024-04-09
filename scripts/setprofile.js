@@ -59,7 +59,12 @@ populateUserInfo();
 //Function to enable the form fields for editing
 function editUserInfo() {
     document.getElementById('personalInfoFields').disabled = false;
+    // Adjust to 'block' to match the CSS for centering
+    // document.getElementById('mypic-input').style.display = 'block'; // Make the input itself invisible
+    document.querySelector('label[for="mypic-input"]').style.display = 'block'; // Use 'block' for the label as well
 }
+
+
 
 var ImageFile;      //global variable to store the File Object reference
 
