@@ -310,7 +310,11 @@ label[for="mypic-input"] {
   background-color: #BED8D4 !important;
 }
 
-
+textarea {
+  resize: vertical !important; /* Allow vertical resizing */
+  min-height: 100px !important; /* Set a minimum height */
+  max-height: 300px !important; /* Set a maximum height */
+}
 
 
 
